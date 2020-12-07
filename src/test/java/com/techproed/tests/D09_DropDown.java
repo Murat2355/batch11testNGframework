@@ -6,10 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class D09_DropDown {
@@ -31,32 +33,69 @@ public class D09_DropDown {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.get("https://the-internet.herokuapp.com/dropdown");
+
 
     }
 
     @Test
     public void  dropDown(){
-        driver.get("https://the-internet.herokuapp.com/dropdown");
+        //  1.Index kullanarak Seçenek 1’i (Option 1) seçin ve yazdırın
+
+        //1. adim dropdown webelementinini locate edin
         WebElement dropDown = driver.findElement(By.xpath("//select[@id='dropdown']"));
 
-        Select dropdownList = new Select(dropDown);
-        //  1.Index kullanarak Seçenek 1’i (Option 1) seçin ve yazdırın
-        dropdownList.selectByIndex(1);
-        System.out.println(dropdownList.getFirstSelectedOption().getText());
+        //2.ADIM SELECT Objesi olusturalim.ve locate ettigimiz Webelementi parametre olarak objeye ekledik.
+        Select select = new Select(dropDown);
 
-        //  2.Value kullanarak Seçenek 2'yi (Option 2) seçin ve yazdırın
-        dropdownList.selectByValue("2");
-        System.out.println(dropdownList.getFirstSelectedOption().getText());
+        //3.adim varolan 3 yontemden herhangi biri ile istedigimiz kategoriyi secelim.
 
-        //  3.Visible Text(Görünen metin) kullanarak Seçenek 1’i (Option 1) seçin
-        // ve yazdırın
-        dropdownList.selectByVisibleText("Option 1");
-        System.out.println(dropdownList.getFirstSelectedOption().getText());
+        select.selectByIndex(1);
+        String  ilkSecilenOpsiyon = select.getFirstSelectedOption().getText();
 
-
+        //sectigimiz optionun "Option 1" oldugunu test edin
+        Assert.assertEquals(ilkSecilenOpsiyon,"Option 1");
 
 
     }
+    @Test
+    public  void test02 () {
+        //  2.Value kullanarak Seçenek 2'yi (Option 2) seçin ve yazdırın
+        WebElement dropDown = driver.findElement(By.xpath("//select[@id='dropdown']"));
+        Select select = new Select(dropDown);
+        select.selectByValue("2");
+
+        String  ikinciSecilenOpsiyon = select.getFirstSelectedOption().getText();
+        //sectigimiz optionun "Option 2" oldugunu test edin
+        Assert.assertEquals(ikinciSecilenOpsiyon,"Option 2");
+
+
+    }
+    @Test
+    public void tumListe(){
+        //  4.Tüm dropdown değerleri(value) yazdırın
+        WebElement dropDown = driver.findElement(By.xpath("//select[@id='dropdown']"));
+        Select select = new Select(dropDown);
+
+
+        List<WebElement> listeninTamami = select.getOptions();
+        for (WebElement w:listeninTamami) {
+            System.out.println(w.getText());
+        }
+        //  5. Dropdown’un boyutunu bulun, Dropdown’da 4 öğe varsa konsolda
+        // True , degilse False yazdırın.
+
+        int listeninBoyutu = listeninTamami.size();
+        if (listeninBoyutu==4){
+            System.out.println("True");
+        }else{
+            System.out.println("False");
+        }
+
+
+    }
+
+
 
 
 
@@ -64,6 +103,6 @@ public class D09_DropDown {
 
     @AfterClass
     public void tearDown(){
-        driver.close();
+        //driver.close();
     }
 }
