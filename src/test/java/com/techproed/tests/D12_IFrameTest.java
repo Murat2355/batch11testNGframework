@@ -44,6 +44,7 @@ public class D12_IFrameTest {
         System.out.println(elemantalYazisiElementi.getText());
         softAssert.assertAll();
     }
+
     @AfterClass
     public void tearDown(){
         driver.close();
