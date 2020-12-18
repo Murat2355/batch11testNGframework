@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestBase {
 
     protected WebDriver driver;
+
     @BeforeClass
     public void setUp(){
         WebDriverManager.chromedriver().setup();

@@ -3,7 +3,7 @@ import com.techproed.utilities.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.List;
 public class D18_WebTables extends TestBase {
@@ -68,4 +68,75 @@ public class D18_WebTables extends TestBase {
         }
 
     }
+    @Test
+    public void printColumns(){
+        login();
+        //● printColumns() metodu oluşturun
+        //          ○ table body'sinde bulunan toplam sutun(column) sayısını bulun.
+        List<WebElement> basliklarListesi = driver.findElements(By.xpath("//thead//th"));
+        int sutunSayisi = basliklarListesi.size();
+
+        //          ○ 5.column daki elementleri konsolda yazdırın.
+        List<WebElement> allSutun = driver.findElements(By.xpath("//tbody//td[5]"));
+
+        for (WebElement w:allSutun
+        ) {
+            System.out.println(w.getText() );
+        }
+
+        //          ○ Table body'sinde bulunan sutunlari(column) konsolda yazdırın.
+
+        for (int i=1; i<=sutunSayisi; i++){
+            List<WebElement> allSutun1 = driver.findElements(By.xpath("//tbody//td[" + i + "]"));
+            WebElement sutunBasligi = driver.findElement(By.xpath("//thead//th[" + i + "]"));
+            System.out.println("=========");
+            System.out.println(sutunBasligi.getText());
+            System.out.println(i + ".sutun " );
+            System.out.println("=========");
+            for (WebElement w:allSutun1
+            ) {
+                System.out.println(w.getText());
+
+            }
+        }
+        //  ○ Table body’sinde bulunan sutunlari(column) konsolda yazdırın.
+        // her sutunun basina sutun header'ini yazsin
+
+    }
+    @Test
+    public void asd(){
+        login();
+        //tum.sutun basliklarini yazdiriniz
+        for(int i = 1; i<=9;i++){
+            WebElement ucuncuSutunBasligi = driver.findElement(By.xpath("//thead//th[" + i + "]"));
+            System.out.println(ucuncuSutunBasligi.getText());
+        }
+
+
+
+    }
+    //1. Bir metod oluşturun : printData(int row, int column);
+    // a. Satır(row) ve sütun(column) numarasını girdiğinizde, printData metodu bu  hücredeki(cell) veriyi yazdırmalıdır.
+    public String printData(int row, int column){
+        WebElement yazdirilacakData = driver.findElement(By.xpath("//tbody//tr[" + row + "]//td[" + column + "]"));
+        System.out.println(yazdirilacakData.getText());
+
+
+        return yazdirilacakData.getText();
+    }
+    @Test
+    public void printDataTest(){
+        login();
+        //String yazdirilanData = printData(3,5);
+        //2. Baska bir Test metodu oluşturun: printDataTest();
+        // a. Ve bu metodu printData() methodunu cagirmak icin kullanin.
+        // b. Örnek: printData (3,5); => 3. satır, 5. Sütundaki veriyi yazdırmalıdır
+        //printData(4,7);
+        //c. yazdirilan datanin olmasi gereken dataya esit oldugunu test edin
+        Assert.assertEquals(printData(3,5),"NewYork");
+
+
+    }
+
+
 }
