@@ -6,16 +6,17 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    //ilk yapacagimiz sey instance olarak properties Class'indan properties objesi olusturmak
-    //Bu obje yi static block icerrisinde kullanacagimdan static yapmam gereiyor.
-    //Bu objeyi sadece bu class da yapacagimiz icin private yapmamiz onerilir.
-    private static Properties properties;
+    // ilk yapacagimiz sey instance olarak properties objesi olusturmak
+    // bu objeyi static blok icerisinde de kullanacagimdan static yapmam gerekiyor
+    // bu objeyi sadece bu classda kullanacagim icin private yapmamiz onerilir
 
-    //static block:her zaman ilk olarak static block calisir.
+    static private Properties properties;
+
     static {
-        String path = "configuration.properties";
+
+        String path="configuration.properties";
         try {
-            FileInputStream fileInputStream = new FileInputStream(path);
+            FileInputStream fileInputStream=new FileInputStream(path);
             properties=new Properties();
             properties.load(fileInputStream);
 
@@ -27,8 +28,8 @@ public class ConfigReader {
         }
 
     }
+
     public static String getProperty(String key){
         return properties.getProperty(key);
     }
-
 }

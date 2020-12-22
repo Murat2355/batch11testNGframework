@@ -1,6 +1,6 @@
 package com.techproed.smokeTest;
 
-import com.techproed.pages.CrystalHotelPages;
+import com.techproed.pages.CrystalHotelPage;
 import com.techproed.utilities.TestBase;
 import org.testng.annotations.Test;
 
@@ -18,11 +18,11 @@ public class PositiveTestWithPage extends TestBase {
         //test data password : Manager2!
         //Degerleri girildiginde sayfaya basarili sekilde girilebildigini test et
 
-        CrystalHotelPages crystalHotelPages = new CrystalHotelPages(driver);
-        crystalHotelPages.logIn.click();
-        crystalHotelPages.userTextBox.sendKeys("manager");
-        crystalHotelPages.passwordTextBox.sendKeys("Manager2!");
-        crystalHotelPages.loginButton.submit();
+        CrystalHotelPage crystalHotelPage = new CrystalHotelPage(driver);
+        crystalHotelPage.logIn.click();
+        crystalHotelPage.userTextBox.sendKeys("manager");
+        crystalHotelPage.passwordTextBox.sendKeys("Manager2!");
+        crystalHotelPage.loginButton.submit();
         Thread.sleep(5000);
     }
 }

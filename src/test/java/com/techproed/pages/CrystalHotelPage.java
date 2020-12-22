@@ -1,5 +1,6 @@
 package com.techproed.pages;
 
+import com.techproed.utilities.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,10 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
-public class CrystalHotelPages {
+public class CrystalHotelPage {
+
 
     WebDriver driver;
-    public CrystalHotelPages(WebDriver driver){
+    public CrystalHotelPage(WebDriver driver){
         this.driver=driver;
         PageFactory.initElements(driver,this);
     }

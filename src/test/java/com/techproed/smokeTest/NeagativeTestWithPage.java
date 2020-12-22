@@ -1,6 +1,6 @@
 package com.techproed.smokeTest;
 
-import com.techproed.pages.CrystalHotelPages;
+import com.techproed.pages.CrystalHotelPage;
 import com.techproed.utilities.TestBase;
 import org.testng.annotations.Test;
 
@@ -15,10 +15,10 @@ public class NeagativeTestWithPage extends TestBase {
     @Test
     public void test(){
         driver.get("http://qa-environment.crystalkeyhotels.com");
-        CrystalHotelPages crystalHotelPages = new CrystalHotelPages(driver);
-        crystalHotelPages.logIn.click();
-        crystalHotelPages.userTextBox.sendKeys("manager");
-        crystalHotelPages.passwordTextBox.sendKeys("managers");
-        crystalHotelPages.loginButton.click();
+        CrystalHotelPage crystalHotelPage = new CrystalHotelPage(driver);
+        crystalHotelPage.logIn.click();
+        crystalHotelPage.userTextBox.sendKeys("manager");
+        crystalHotelPage.passwordTextBox.sendKeys("managers");
+        crystalHotelPage.loginButton.click();
     }
 }
